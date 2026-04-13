@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/eurovision_aspnet_project/eurovision/.vs
+/eurovision_aspnet_project/eurovision/bin/roslyn
+/eurovision_aspnet_project/eurovision/bin
+/eurovision_aspnet_project/eurovision/Content
+/eurovision_aspnet_project/eurovision/obj/Debug
+/eurovision_aspnet_project/eurovision/packages
