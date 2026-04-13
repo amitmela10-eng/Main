@@ -1,0 +1,32 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="eurovision.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html  lang="he" dir="rtl">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %></title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link rel="STYLESHEET" type="text/css" href="style/style.css" />
+
+</head>
+<body>
+    
+       <div class="top-bar">
+        <nav class="menu">
+            <a href="default.aspx">עמוד הבית</a>
+            <a href="about_eurovision.aspx">על האירוויזיון</a>
+            <a href="songs_2026_list.aspx">שירי אירוויזיון 2026</a>
+            <a href="Israel_winners.aspx">הזוכים הישראליים</a>
+            <a href="register.aspx">הרשמה לאתר</a>
+            <a href="quiz.aspx">חידון והבעת דעה</a>
+        </nav>
+    </div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    
+</body>
+</html>
