@@ -1,182 +1,305 @@
-a /* RESET קטן */
+/* 
+   Eurovision 2026 - Premium Design System
+   Unified Style for all pages 
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Heebo:wght@300;400;700;900&display=swap');
+
+:root {
+    --primary: #6a11cb;
+    --secondary: #2575fc;
+    --accent: #ff007a;
+    --accent-glow: rgba(255, 0, 122, 0.4);
+    --bg-dark: #0f0c29;
+    --bg-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    --glass: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-white: #ffffff;
+    --text-muted: #cbd5e0;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* צבעים מרכזיים */
-:root {
-    --primary: #2563eb;
-    --dark: #0f0c29;
-    --gradient: linear-gradient(to right, #24243e, #302b63, #0f0c29);
-}
-
-/* BODY */
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: var(--gradient);
-    color: white;
+    font-family: 'Heebo', 'Outfit', sans-serif;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-white);
+    line-height: 1.6;
+    overflow-x: hidden;
+    direction: rtl;
 }
 
-/* ===== TOP MENU ===== */
+/* ===== Typography ===== */
+h1, h2, h3 {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, #fff, #ff007a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.5rem; }
+
+/* ===== Navigation ===== */
 .top-bar {
-    background: var(--gradient);
-    padding: 18px 30px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     position: sticky;
     top: 0;
     z-index: 1000;
+    background: rgba(15, 12, 41, 0.8);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 1rem 2rem;
 }
 
 .menu {
     display: flex;
     justify-content: center;
-    gap: 14px;
+    align-items: center;
+    gap: 1.5rem;
     flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-    .menu a {
-        padding: 10px 18px;
-        background-color: #6200ea;
-        color: white;
-        text-decoration: none;
-        border-radius: 22px;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-
-        .menu a:hover {
-            background-color: #7c2cff;
-            transform: translateY(-2px);
-        }
-
-/* ===== PAGE CONTENT ===== */
-.page-content {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 20px;
-    text-align: center;
+.menu a {
+    color: var(--text-white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* כותרת */
-h1 {
-    font-size: 2.8rem;
-    margin-bottom: 25px;
-    color: #00d2ff;
+.menu a:hover {
+    background: var(--glass);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-/* ===== REGISTER FORM ===== */
-.form-container {
-    width: 420px;
-    margin: 40px auto;
-    background: rgba(255,255,255,0.08);
-    padding: 30px;
-    border-radius: 18px;
+.user-status {
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logout-link {
+    color: #ff4d4d !important;
+}
+
+/* ===== Layout Containers ===== */
+.container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.glass-card {
+    background: var(--glass);
     backdrop-filter: blur(10px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* ===== Form Styles ===== */
+.form-container {
+    max-width: 450px;
+    margin: 2rem auto;
 }
 
 .form-group {
-    margin-bottom: 15px;
-    text-align: right;
+    margin-bottom: 1.5rem;
 }
 
-label {
+.form-group label {
     display: block;
-    margin-bottom: 6px;
-    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-muted);
 }
 
 .input-box {
     width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 1rem;
+    color: white;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.input-box:focus {
     outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
 }
 
-/* כפתור */
-.btn {
+.btn-primary {
     width: 100%;
-    padding: 12px;
-    background: var(--primary);
-    color: white;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
     border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-    .btn:hover {
-        background: #1e40af;
-    }
-
-/* הודעות */
-.message {
-    margin-top: 15px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.error {
-    color: #ff4d4d;
-}
-
-.success {
-    color: #4caf50;
-}
-
-/* ===== TABLE ===== */
-.table-container {
-    max-width: 1100px;
-    margin: 40px auto;
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: rgba(0,0,0,0.3);
-}
-
-th {
-    background: #6200ea;
-    padding: 15px;
-    text-align: right;
-}
-
-td {
-    padding: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-tr:hover {
-    background: rgba(255,255,255,0.1);
-}
-
-/* כפתור יוטיוב */
-.yt-link {
-    background: red;
-    padding: 6px 14px;
-    border-radius: 20px;
+    padding: 1rem;
+    border-radius: 12px;
     color: white;
-    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
 }
 
-    .yt-link:hover {
-        background: darkred;
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(106, 17, 203, 0.4);
+}
+
+/* ===== Cards (Winners) ===== */
+.winners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.winner-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+}
+
+.winner-card:hover {
+    transform: scale(1.05);
+    border-color: var(--accent);
+}
+
+.winner-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.winner-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+}
+
+.winner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.winner-name {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+.win-year {
+    background: var(--accent);
+    padding: 0.2rem 0.8rem;
+    border-radius: 8px;
+    font-weight: 900;
+}
+
+/* ===== Home Page Layout (Side-by-side) ===== */
+.hero-section {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 2rem;
+    align-items: start;
+}
+
+.big-preview {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 1px solid var(--glass-border);
+}
+
+.thumb-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.thumb-row img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.thumb-row img:hover {
+    border-color: var(--accent);
+    transform: scale(1.05);
+}
+
+/* ===== Tables ===== */
+.songs-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.songs-table th {
+    padding: 1.5rem;
+    text-align: right;
+    color: var(--text-muted);
+}
+
+.songs-table tr td {
+    background: rgba(255,255,255,0.03);
+    padding: 1.2rem;
+}
+
+.songs-table tr td:first-child { border-radius: 15px 0 0 15px; }
+.songs-table tr td:last-child { border-radius: 0 15px 15px 0; }
+
+.song-link {
+    background: var(--accent);
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.song-link:hover {
+    background: white;
+    color: var(--accent) !important;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    .hero-section {
+        grid-template-columns: 1fr;
     }
-
-/* ===== RESPONSIVE ===== */
-
-
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-    }
-
-    .form-container {
-        width: 90%;
+    .thumb-row {
+        flex-direction: row;
+        overflow-x: auto;
     }
 }

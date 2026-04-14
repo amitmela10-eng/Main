@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -17,10 +17,48 @@ namespace eurovision
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserEmail"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
+            string userEmail = Session["UserEmail"].ToString();
+
             if (!IsPostBack)
             {
-                BindSongs();
+                if (HasUserAlreadyVoted(userEmail))
+                {
+                    ShowAlreadyVotedMessage();
+                }
+                else
+                {
+                    BindSongs();
+                }
             }
+        }
+
+        private bool HasUserAlreadyVoted(string email)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM SongVotes WHERE UserEmail = @Email";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    conn.Open();
+                    int count = (int)cmd.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+        }
+
+        private void ShowAlreadyVotedMessage()
+        {
+            litMessage.Text = "<div class='alert-card'>שלום! כבר ביצעת הצבעה מחשבון זה. לא ניתן להצביע פעמיים.</div>";
+            btnSaveVotes.Visible = false;
+            rptSongs.Visible = false;
+            pnlSummary.Visible = false;
         }
 
         private void BindSongs()
@@ -200,23 +238,29 @@ namespace eurovision
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
+                string userEmail = Session["UserEmail"].ToString();
 
                 foreach (var vote in votes)
                 {
-                    string insertQuery = @"INSERT INTO SongVotes (SongId, RankPosition, Points)
-                               VALUES (@SongId, @RankPosition, @Points)";
+                    string insertQuery = @"INSERT INTO SongVotes (SongId, RankPosition, Points, UserEmail)
+                               VALUES (@SongId, @RankPosition, @Points, @UserEmail)";
 
                     using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
                     {
                         cmd.Parameters.AddWithValue("@SongId", vote.SongId);
                         cmd.Parameters.AddWithValue("@RankPosition", vote.Rank);
                         cmd.Parameters.AddWithValue("@Points", vote.Points);
+                        cmd.Parameters.AddWithValue("@UserEmail", userEmail);
                         cmd.ExecuteNonQuery();
                     }
                 }
             }
             lblMessage.Text = "ההצבעה נשמרה בהצלחה.";
             lblMessage.ForeColor = System.Drawing.Color.Green;
+            
+            // Disable voting after successful submission
+            ShowAlreadyVotedMessage();
+            litMessage.Text = "<div class='alert-card' style='background:rgba(0, 255, 122, 0.1); border-color:#00ff7a;'>ההצבעה שלך נשלחה בהצלחה! תודה על השתתפותך.</div>";
         }
 
         private int GetPointsByRank(int rank)

@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="eurovision.SiteMaster" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="eurovision.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -6,27 +6,33 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %></title>
+    <title><%: Page.Title %> - אירוויזיון 2026</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <link rel="STYLESHEET" type="text/css" href="style/style.css" />
-
+    <link rel="STYLESHEET" type="text/css" href="style/style.css" />
 </head>
 <body>
-    
-       <div class="top-bar">
+    <form runat="server">
+    <div class="top-bar">
         <nav class="menu">
             <a href="default.aspx">עמוד הבית</a>
-            <a href="about_eurovision.aspx">על האירוויזיון</a>
-            <a href="songs_2026_list.aspx">שירי אירוויזיון 2026</a>
-            <a href="Israel_winners.aspx">הזוכים הישראליים</a>
-            <a href="register.aspx">הרשמה לאתר</a>
-            <a href="quiz.aspx">חידון והבעת דעה</a>
+            <a href="songs_2026_list.aspx">הצבעה 2026</a>
+            <a href="Israel_winners.aspx">זוכים ישראליים</a>
+            
+            <div class="user-status">
+                <% if (Session["UserEmail"] == null) { %>
+                    <a href="Login.aspx">התחברות</a>
+                    <a href="register.aspx">הרשמה</a>
+                <% } else { %>
+                    <span>שלום, <%= Session["FirstName"] %></span>
+                    <asp:LinkButton ID="btnLogout" runat="server" OnClick="btnLogout_Click" CssClass="logout-link">התנתק</asp:LinkButton>
+                <% } %>
+            </div>
         </nav>
     </div>
-        <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
-        </div>
-    
+    <div class="container body-content">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
 </body>
 </html>
